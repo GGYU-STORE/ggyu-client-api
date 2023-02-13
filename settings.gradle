@@ -1,1 +1,3 @@
 rootProject.name = 'ggyu-client'
+include 'ggyu-client-app'
+include 'ggyu-base'

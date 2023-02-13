@@ -1,4 +1,4 @@
-package com.ggyu.client;
+package com.ggyu.clientapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
