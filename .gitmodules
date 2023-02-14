@@ -1,3 +1,4 @@
 [submodule "ggyu-base"]
 	path = ggyu-base
 	url = git@github.com:GGYU-STORE/ggyu-base.git
+    branch = master
