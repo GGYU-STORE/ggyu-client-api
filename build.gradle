@@ -1,30 +1,41 @@
-plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.0.1'
-	id 'io.spring.dependency-management' version '1.1.0'
+
+buildscript {
 }
 
-group = 'com.ggyu-client'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-tasks.withType(JavaCompile) {
-	options.encoding = 'UTF-8'
-}
+// 하위 모든 프로젝트 공통 세팅
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'java-library'
+	apply plugin: 'idea'
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
+	group = 'com.ggyu-client'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = '17'
+	targetCompatibility = '17'
+	tasks.withType(JavaCompile) {
+		options.encoding = 'UTF-8'
+	}
+
+	repositories {
+		mavenCentral()
+	}
+
+	// 하위 모듈에서 공통으로 사용하는 세팅 추가
+	dependencies {
+		compileOnly 'org.projectlombok:lombok:1.18.24'
+		testCompileOnly 'org.projectlombok:lombok:1.18.24'
+
+		annotationProcessor 'org.projectlombok:lombok:1.18.24'
+		testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+	}
+
+	tasks.named('test') {
+		useJUnitPlatform()
 	}
 }
 
-repositories {
-	mavenCentral()
+project(':ggyu-client-app') {
+	dependencies {
+		api project(':ggyu-base') // 컴파일 시 ggyu-base project 로딩
+	}
 }
-
-tasks.named('test') {
-	useJUnitPlatform()
-}
-
-bootJar { enabled = false}
-
-jar { enabled = true }
