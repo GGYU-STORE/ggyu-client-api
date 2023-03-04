@@ -4,6 +4,9 @@ spring:
     url: jdbc:mariadb://office.leevi.co.kr:49886/?characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: Phantom@222
+  mvc:
+    converters:
+      preferred-json-mapper: gson
 
   jpa:
     show-sql: true

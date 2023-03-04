@@ -12,6 +12,7 @@ configurations {
     runtimeClasspath {
         extendsFrom developmentOnly
     }
+    architectureTestConfiguration
 }
 
 repositories {
@@ -25,12 +26,18 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.8'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.14'
+
+    api project(':ggyu-base')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.springframework.security:spring-security-test'
+//    architectureTestConfiguration project(':ggyu-base')
+    testImplementation project(':ggyu-base')
 }
 
 tasks.named('test') {
@@ -42,3 +49,15 @@ tasks.named("bootJar") {
 tasks.named("jar") {
     enabled = false
 }
+
+//task architectureTestTask(type: Test) {
+//    group = 'com.ggyu-client'
+//
+//    // refer to source set that contains shared tests
+//    testClassesDirs = project(':ggyu-base').sourceSets.test.output.classesDirs
+//    classpath += project(':ggyu-base').sourceSets.test.runtimeClasspath
+//
+//    // optional, required for shared test to see subproject tests
+//    classpath += sourceSets.test.runtimeClasspath
+//    classpath += sourceSets.tes.runtimeClasspath
+//}
